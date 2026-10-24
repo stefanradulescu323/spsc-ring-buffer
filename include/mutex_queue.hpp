@@ -1,8 +1,9 @@
 #pragma once
-#include <queue>
+#include <cstddef>
 #include <mutex>
+#include <queue>
 
-template <typename T>
+template <typename T, std::size_t Capacity>
 class MutexQueue {
     std::queue<T> queue_;
     std::mutex mutex_;
@@ -10,6 +11,7 @@ class MutexQueue {
 public:
     bool try_push(const T& item) {
         std::lock_guard<std::mutex> lock(mutex_);
+        if (queue_.size() == Capacity) return false; // full
         queue_.push(item);
         return true;
     }

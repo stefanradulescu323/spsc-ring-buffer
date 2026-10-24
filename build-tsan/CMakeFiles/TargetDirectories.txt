@@ -1,0 +1,4 @@
+/mnt/c/Users/stefa/source/repos/spsc/build-tsan/CMakeFiles/benchmark.dir
+/mnt/c/Users/stefa/source/repos/spsc/build-tsan/CMakeFiles/test_basic.dir
+/mnt/c/Users/stefa/source/repos/spsc/build-tsan/CMakeFiles/edit_cache.dir
+/mnt/c/Users/stefa/source/repos/spsc/build-tsan/CMakeFiles/rebuild_cache.dir
