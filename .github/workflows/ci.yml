@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.compiler }}, tsan=${{ matrix.tsan }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
+        tsan: ["OFF", "ON"]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Configure
+        run: cmake -B build -S . -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} -DSPSC_TSAN=${{ matrix.tsan }}
+
+      - name: Build
+        run: cmake --build build -j
+
+      # Recent kernels randomize memory layout more than older TSan versions support
+      - name: Allow ThreadSanitizer's memory layout
+        if: matrix.tsan == 'ON'
+        run: sudo sysctl vm.mmap_rnd_bits=28
+
+      - name: Test
+        run: ./build/test_basic
