@@ -1,5 +1,7 @@
 # Lock-free SPSC Ring Buffer
 
+[![CI](https://github.com/stefanradulescu323/spsc-ring-buffer/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanradulescu323/spsc-ring-buffer/actions/workflows/ci.yml)
+
 A bounded, lock-free single-producer / single-consumer queue in C++20, plus a benchmark that measures each optimization step against a mutex-protected `std::queue`.
 
 On an Intel Core i7-8750H (WSL2), the final version reaches **5–11× the throughput** and **12× lower round-trip latency** than the mutex baseline.
